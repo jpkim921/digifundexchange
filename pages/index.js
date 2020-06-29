@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -20,18 +21,24 @@ export default function Home() {
         </p>
 
         <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <img src="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/btc.svg" />
-            <span>Bitcoin</span>
-          </a>
-          <a href="https://nextjs.org/docs" className="card">
-            <img src="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/eth.svg" />
-            <span>Ethereum</span>
-          </a>
-          <a href="https://nextjs.org/docs" className="card">
-            <img src="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/XRP.svg" />
-            <span>Ripple</span>
-          </a>
+          <Link href="#">
+            <a className="card">
+              <img src="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/btc.svg" />
+              <span>Bitcoin</span>
+            </a>
+          </Link>
+          <Link href="#">
+            <a className="card">
+              <img src="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/eth.svg" />
+              <span>Ethereum</span>
+            </a>
+          </Link>
+          <Link href="#">
+            <a className="card">
+              <img src="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/XRP.svg" />
+              <span>Ripple</span>
+            </a>
+          </Link>
         </div>
       </main>
 
