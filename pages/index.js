@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
 
-import CurrencyList from "../components/currencylist";
 
 export default function Home({ currencies }) {
   return (
@@ -24,7 +23,7 @@ export default function Home({ currencies }) {
 
         <div className="grid">
           {currencies.map((currency) => (
-            <Link href="#" key={currency.id}>
+            <Link href="/currency/[id]" as={`/currency/${currency.id}`}key={currency.id}>
               <a className="card">
                 <img src={currency.logo_url} />
                 <span>{currency.name}</span>
