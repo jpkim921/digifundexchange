@@ -23,7 +23,7 @@ export default function Home({ currencies }) {
 
         <div className="grid">
           {currencies.map((currency) => (
-            <Link href="/currency/[id]" as={`/currency/${currency.id}`}key={currency.id}>
+            <Link href="/currency/[id]" as={`/currency/${currency.id}`} key={currency.id}>
               <a className="card">
                 <img src={currency.logo_url} />
                 <span>{currency.name}</span>
@@ -203,8 +203,6 @@ export async function getStaticProps() {
     `https://api.nomics.com/v1/currencies?key=${nomicsKey}&ids=BTC,ETH,XRP&attributes=id,name,logo_url`
   );
   const currencies = await res.json();
-
-  console.log(currencies);
 
   // By returning { props: currencies }, the Home component
   // will receive `currencies` as a prop at build time
