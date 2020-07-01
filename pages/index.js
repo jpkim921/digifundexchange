@@ -1,6 +1,8 @@
 import Head from "next/head";
+import Link from "next/link";
 
-export default function Home() {
+
+export default function Home({ currencies }) {
   return (
     <div className="container">
       <Head>
@@ -20,18 +22,14 @@ export default function Home() {
         </p>
 
         <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <img src="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/btc.svg" />
-            <span>Bitcoin</span>
-          </a>
-          <a href="https://nextjs.org/docs" className="card">
-            <img src="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/eth.svg" />
-            <span>Ethereum</span>
-          </a>
-          <a href="https://nextjs.org/docs" className="card">
-            <img src="https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/XRP.svg" />
-            <span>Ripple</span>
-          </a>
+          {currencies.map((currency) => (
+            <Link href="/currency/[id]" as={`/currency/${currency.id}`} key={currency.id}>
+              <a className="card">
+                <img src={currency.logo_url} />
+                <span>{currency.name}</span>
+              </a>
+            </Link>
+          ))}
         </div>
       </main>
 
@@ -195,4 +193,23 @@ export default function Home() {
       `}</style>
     </div>
   );
+}
+
+// This function gets called at build time
+export async function getStaticProps() {
+  // Call an external API endpoint to get posts
+  const nomicsKey = process.env.nomicsKey;
+  const res = await fetch(
+    `https://api.nomics.com/v1/currencies?key=${nomicsKey}&ids=BTC,ETH,XRP&attributes=id,name,logo_url`
+  );
+  const currencies = await res.json();
+
+  // By returning { props: currencies }, the Home component
+  // will receive `currencies` as a prop at build time
+
+  return {
+    props: {
+      currencies,
+    },
+  };
 }
